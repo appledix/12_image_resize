@@ -16,15 +16,12 @@ def get_args_from_terminal():
 def get_proportions(image_size):
     return image_size[0] / image_size[1]
 
-def is_proportions_fine(first_image_size, second_image_size):
+def are_proportions_fine(first_image_size, second_image_size):
     original_proportions = get_proportions(first_image_size)
     new_proportions = get_proportions(second_image_size)
-    if original_proportions == new_proportions:
-        return True
-    else:
-        return get_user_decision_about_proportions()
+    return original_proportions == new_proportions
 
-def get_user_decision_about_proportions():
+def is_user_wish_to_continue_with_broken_proportions():
     while True:
         user_answer = input("Warning!\nOriginal image proportions are different" \
             " from the input values. \nContinue?(Y,n):")
@@ -85,8 +82,9 @@ def main():
     if scale:
         width, height = scale_sizes(original_image.size, scale)
     elif width and height:
-        if not is_proportions_fine(original_image.size, (width, height)):
-            return
+        if not are_proportions_fine(original_image.size, (width, height)):
+            if not is_user_wish_to_continue_with_broken_proportions():
+                return
 
     new_image = resize_image(original_image, width, height)
     original_image_name = os.path.basename(path_to_original_image)

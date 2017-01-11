@@ -17,9 +17,7 @@ def get_proportions(image_size):
     return image_size[0] / image_size[1]
 
 def are_proportions_fine(first_image_size, second_image_size):
-    original_proportions = get_proportions(first_image_size)
-    new_proportions = get_proportions(second_image_size)
-    return original_proportions == new_proportions
+    return get_proportions(first_image_size) == get_proportions(second_image_size)
 
 def is_user_wish_to_continue_with_broken_proportions():
     while True:

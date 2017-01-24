@@ -4,8 +4,7 @@
 
 ## Использование
 Запуск через терминал, при помощи python 3:
-
-	python3.5 image_resize.py <аргументы скрипта>
+`python3.5 image_resize.py <аргументы скрипта>`
 
 ## Доступные аргументы:
 Обязательные:
@@ -26,11 +25,10 @@
 Если исходный файл называется pic.jpg (100x200), то после вызова python3.5 image_resize.py --scale 2 pic.jpg будет создан файл pic__200x400.jpg.
 
 ## Примеры использования
-* python3.5 image_resize.py --scale 10 img.jpg  | Увеличить img.jpg в 10 раз и сохранить результат рядом с исходным изображением
-* python3.5 image_resize.py -wt 200 -ht 100 -o /tmp img.jpg  | Изменить размер img.jpg на 200x100 и сохранить результат в папку /tmp 
+* `python3.5 image_resize.py --scale 10 img.jpg`  | Увеличить img.jpg в 10 раз и сохранить результат рядом с исходным изображением
+* `python3.5 image_resize.py -wt 200 -ht 100 -o /tmp img.jpg`  | Изменить размер img.jpg на 200x100 и сохранить результат в папку /tmp 
 
 
 # Project Goals
 
 The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
-# 12_image_resize

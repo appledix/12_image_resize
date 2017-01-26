@@ -81,7 +81,7 @@ def main():
         original_image = Image.open(path_to_original_image)
     except OSError as msg:
         print("Can't open original image.\nError: {}".format(msg))
-        return
+        exit(1)
     if scale:
         width, height = scale_sizes(original_image.size, scale)
     elif (width and height) \

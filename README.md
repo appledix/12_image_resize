@@ -28,6 +28,12 @@
 * `python3.5 image_resize.py --scale 10 img.jpg`  | Увеличить img.jpg в 10 раз и сохранить результат рядом с исходным изображением
 * `python3.5 image_resize.py -wt 200 -ht 100 -o /tmp img.jpg`  | Изменить размер img.jpg на 200x100 и сохранить результат в папку /tmp 
 
+## Установка скрипта 
+В терминале: `git clone https://github.com/appledix/12_image_resize.git`
+
+## Установка зависимостей
+В терминале: `pip3 install -r requirements.txt`
+
 
 # Project Goals
 

@@ -12,12 +12,10 @@ def get_args_from_terminal():
     parser.add_argument("-s", "--scale", help="Increase image N times", type=float)
     parser.add_argument("-o", "--output", help="Result image location", type=str)
     args = parser.parse_args()
-    if args.output and (not args.output.endswith('/')):
-        args.output += "/"
-    else:
-        print("The output location is not specified."
-              "\nResult image will be put into original image folder.")
+    if not args.output:
         args.output = os.path.dirname(args.path_to_image)
+    elif (not args.output.endswith('/')):
+        args.output += "/"
     return args
 
 def get_proportions(image_size):

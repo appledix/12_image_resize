@@ -40,7 +40,8 @@ def resize_image(image, width=None, height=None):
         new_size = (int(width), int(height))
         return image.resize(new_size)
 
-def get_output_image_name(new_image, original_image_name):
+def get_output_image_name(new_image, path_to_original_image):
+    original_image_name = os.path.basename(path_to_original_image)
     width, height = new_image.size
     name_postfix = "__{}x{}".format(width, height)
     return original_image_name.replace('.', '{}.'.format(name_postfix))
@@ -81,8 +82,7 @@ def main():
             else:
                 continue
     new_image = resize_image(original_image, width, height)
-    original_image_name = os.path.basename(path_to_original_image)
-    new_image_name = get_output_image_name(new_image, original_image_name)
+    new_image_name = get_output_image_name(new_image, path_to_original_image)
     save_image(new_image, new_image_name, output_location)
 
 

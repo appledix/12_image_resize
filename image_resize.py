@@ -72,15 +72,8 @@ def main():
         exit(1)
     if (width and height) \
     and (not are_proportions_fine(original_image.size, (width, height))):
-        while True:
-            user_answer = input("Warning!\nOriginal image proportions are different" \
-                " from the input values. \nContinue?(Y,n):")
-            if user_answer.lower() in ["", "y"]: 
-                break
-            elif user_answer.lower() == "n":
-                exit(0)
-            else:
-                continue
+        print("Warning!\nOriginal image proportions are different" \
+                " from the input values.")
     new_image = resize_image(original_image, width, height, scale)
     new_image_name = get_output_image_name(new_image, path_to_original_image)
     save_image(new_image, new_image_name, output_location)

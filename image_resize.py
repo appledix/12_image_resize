@@ -51,19 +51,15 @@ def save_image(image, image_name, output_location):
 def scale_sizes(image_size, scale): 
     return tuple(int(value*scale) for value in image_size)
 
-def check_arguments(args):
+def main():
+    args = get_args_from_terminal()
     if args.scale and (args.width or args.height):
         print("You can't resize image with --scale and --width and/or --height" \
             " parameters simultaneously. Pick one method, not both.")
-        sys.exit()
+        exit(1)
     elif args.output and (not os.path.isdir(args.output)):
         print("Invalid output location.")
-        sys.exit()
-
-
-def main():
-    args = get_args_from_terminal()
-    check_arguments(args)
+        exit(1)
     path_to_original_image, width, height, scale, output_location = \
     args.path_to_image, args.width, args.height, args.scale, args.output
     try:
@@ -78,7 +74,7 @@ def main():
         while True:
             user_answer = input("Warning!\nOriginal image proportions are different" \
                 " from the input values. \nContinue?(Y,n):")
-            if user_answer.lower() in ["" ,"y"]: 
+            if user_answer.lower() in ["", "y"]: 
                 break
             elif user_answer.lower() == "n":
                 exit(0)

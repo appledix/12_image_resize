@@ -27,17 +27,6 @@ def get_proportions(image_size):
 def are_proportions_fine(first_image_size, second_image_size):
     return get_proportions(first_image_size) == get_proportions(second_image_size)
 
-def is_user_wish_to_continue_with_broken_proportions():
-    while True:
-        user_answer = input("Warning!\nOriginal image proportions are different" \
-            " from the input values. \nContinue?(Y,n):")
-        if user_answer.lower() == "n": 
-            return False
-        elif user_answer.lower() in ["" ,"y"]:
-            return True
-        else:
-            continue
-
 def resize_image(image, width=None, height=None):
     if not width and not height:
         return image
@@ -85,9 +74,16 @@ def main():
     if scale:
         width, height = scale_sizes(original_image.size, scale)
     elif (width and height) \
-    and (not are_proportions_fine(original_image.size, (width, height))) \
-    and (not is_user_wish_to_continue_with_broken_proportions()):
-        return
+    and (not are_proportions_fine(original_image.size, (width, height))):
+        while True:
+            user_answer = input("Warning!\nOriginal image proportions are different" \
+                " from the input values. \nContinue?(Y,n):")
+            if user_answer.lower() in ["" ,"y"]: 
+                break
+            elif user_answer.lower() == "n":
+                exit(0)
+            else:
+                continue
     new_image = resize_image(original_image, width, height)
     original_image_name = os.path.basename(path_to_original_image)
     new_image_name = get_output_image_name(new_image, original_image_name)

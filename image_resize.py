@@ -1,6 +1,5 @@
 import argparse
 import os
-import sys
 
 from PIL import Image
 
@@ -16,8 +15,8 @@ def get_args_from_terminal():
     if args.output and (not args.output.endswith('/')):
         args.output += "/"
     else:
-        print("The output location is not specified." \
-            "\nResult image will be put into original image folder.")
+        print("The output location is not specified."
+              "\nResult image will be put into original image folder.")
         args.output = os.path.dirname(args.path_to_image)
     return args
 
@@ -57,23 +56,20 @@ def scale_sizes(image_size, scale):
 def main():
     args = get_args_from_terminal()
     if args.scale and (args.width or args.height):
-        print("You can't resize image with --scale and --width and/or --height" \
-            " parameters simultaneously. Pick one method, not both.")
-        exit(1)
+        exit("You can't resize image with --scale and --width and/or --height"
+             " parameters simultaneously. Pick one method, not both.")
     elif args.output and (not os.path.isdir(args.output)):
-        print("Invalid output location.")
-        exit(1)
+        exit("Invalid output location.")
     path_to_original_image, width, height, scale, output_location = \
     args.path_to_image, args.width, args.height, args.scale, args.output
     try:
         original_image = Image.open(path_to_original_image)
     except OSError as msg:
-        print("Can't open original image.\nError: {}".format(msg))
-        exit(1)
+        exit("Can't open original image.\nError: {}".format(msg))
     if (width and height) \
     and (not are_proportions_fine(original_image.size, (width, height))):
-        print("Warning!\nOriginal image proportions are different" \
-                " from the input values.")
+        print("Warning!\nOriginal image proportions are different"
+              " from the input values.")
     new_image = resize_image(original_image, width, height, scale)
     new_image_name = get_output_image_name(new_image, path_to_original_image)
     save_image(new_image, new_image_name, output_location)
